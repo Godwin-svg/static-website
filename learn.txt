@@ -1,0 +1,34 @@
+Steps 
+1- create vpc
+- Enable DNS hostname = memorable hostname instead of IP address for our resoucres
+2- Create internet gateway and attcahed to vpc
+- igw : enable resources in the vpc to have access to internet.
+3- creation of subnets : Enable logically grouping of resources bas on their needs
+ - Public subnet resources = load balance, nat gateway. (Auto assign IP address enable)
+ - Private Subnet resources = EC2 instance, RDS instance.
+4- Public subnets Route table createable 
+- Public RT is a resource that has a route to the internet and when associate with any subnet will be public.
+- Add public route (destination = 0.0.0.0/0, target = igw)
+- associate the Public RT with the twoo pulic subnets
+- Note AWS automatically create default route table cal  when you create a vpc
+- subnets not been explicitly associated with any route tables and are therefore associated with the main route table:
+5- NAT Gateway : Allows resources in the private subnets to have access to the internet and 
+ - prevent users from the internet to have access to the resoucres in the private subnets.
+6- Private Subnet Route Table : Enable resources in the private subnets to have access to the internet via the nat gateway.
+ - associate the Private RT with the private subnets.
+ - What is the diff btw public subnets and private subnet.
+ = Private subnets have a route table that route traffic to the internet via the nat gateway
+ = Public subnets have a route table that route traffic to the interenet via the interenet gateway
+7 - Security Group : act as fire wall use to regulate network traffic in the vpc.
+- Application load balancer - SG :
+- EICE-SG
+- App server SG
+8 - Create EC2 Instance Connect Endpoint : Allows you to connect to any resources in the private or public subnet with having to manage the 
+ - without managing the ssh keys.
+9 - Create a target group
+10 - CReate EC2 instance
+- Add the EC2 instance into the target group
+11 - create Alb 
+12- Create new new record in route 53
+13 Request an SSL certificate
+14 Setup HTTPS listener fo the Application load balancer.
